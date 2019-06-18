@@ -3,7 +3,7 @@ import { Router, Route, Link, Switch } from "react-router-dom";
 
 import './style.scss';
 import Header from '../Header';
-import history from '../../history';
+import history from '../../utils/history';
 import ListRoute from '../routes/ListRoute';
 import EditRoute from '../routes/EditRoute';
 import CreateRoute from '../routes/CreateRoute';

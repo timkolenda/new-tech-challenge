@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Button, Form, Select } from 'semantic-ui-react';
 
 import './style.scss';
-import history from '../../history';
-import database from '../../apis/database';
+import { createAd } from '../../utils/databaseCalls';
 
 
 const templateTypeOptions = [
@@ -43,12 +42,9 @@ class AdForm extends Component {
         });
     }
 
-    createAd = async (formValues) => {
-        const response = await database.post('/content', { ...formValues });
-        console.log(response.data);
-        // history.push('/');
-    };
-
+    handleCreateDbEntry = () => {
+        createAd(this.state);
+    }
 
     render() {
         return (            
@@ -85,7 +81,7 @@ class AdForm extends Component {
                     <Button 
                         primary 
                         floated="right" 
-                        onClick={() => this.createAd(this.state)} 
+                        onClick={this.handleCreateDbEntry} 
                     >Create</Button>
                 </div>
             </Form>
