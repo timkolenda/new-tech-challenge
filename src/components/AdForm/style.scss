@@ -1,13 +1,13 @@
 
 
-.ad-form {
-    display: flex;
-    flex-wrap: wrap;
-    .field-container {
-        height: 40px;
-        width: 50%;
-        border: red 1px solid;
+.form {
+    padding: 20px;
+    margin: 20px;
+    .fields {
         display: flex;
-        justify-content: center;
+        flex-wrap: wrap;
+        .field {
+            width: 50%;
+        }
     }
 }
