@@ -1,0 +1,13 @@
+
+
+.ad-form {
+    display: flex;
+    flex-wrap: wrap;
+    .field-container {
+        height: 40px;
+        width: 50%;
+        border: red 1px solid;
+        display: flex;
+        justify-content: center;
+    }
+}
