@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 
-const ListRoute = () => {
+import AdList from '../../AdList';
+
+const ListRoute = ({ setId }) => {
     return(
         <div className="ListRoute">
-            ListRoute
+            <AdList setId={setId}/>
         </div>
     );
 }

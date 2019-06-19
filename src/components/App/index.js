@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Route, Link, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
 import './style.scss';
 import Header from '../Header';
@@ -10,16 +10,25 @@ import CreateRoute from '../routes/CreateRoute';
 
 
 const App = () => {
+
+    // state = {id: ''}
+
+    // setId = (id) => {
+    //     this.setState({ id }, () => {
+    //         history.push(`/edit/${this.state.id}`)
+    //     });
+    // }
+    
     return (
         <div className="app">
             <Router history={history}>
                 <div>
                     <Header />
                     <div className="ui-container">
-                        <Switch>
+                        <Switch>                        
                             <Route path="/" exact component={ListRoute} />
-                            <Route path="/new" exact component={CreateRoute} />
-                            <Route path="/edit" exact component={EditRoute} />
+                            <Route path="/new" exact component={CreateRoute} /> 
+                            <Route path="/edit/:id" exact component={EditRoute} />                        
                         </Switch>
                     </div>
                 </div>

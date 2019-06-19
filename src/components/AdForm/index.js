@@ -1,136 +1,156 @@
 import React, { Component } from "react";
 import { Button, Form, Select } from 'semantic-ui-react';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+
 
 import './style.scss';
-import { createAd } from '../../utils/databaseCalls';
+import history from '../../utils/history';
+import { createAd } from '../../actions';
 
 
-const templateTypeOptions = [
-    { key: 'single', text: 'Single Image Ad', value: 'Single Image Ad' },
-    { key: 'carousel', text: 'Carousel Ad', value: 'Carousel Ad' },
-]
 
-const repeatOptions = [
-    { key: 'daily', text: 'Daily', value: 'Daily' },
-    { key: 'weekly', text: 'Weekly', value: 'Weekly' },
-    { key: 'monthly', text: 'Monthly', value: 'Monthly' },
-]
+//THESE WERE REMOVED BECAUSE SEMANTIC UI AND REDUX-FORM WEREN'T PLAYING NICE - ADJUSTED INPUT TO MORE BASIC VERSION FOR DROPDOWNS
+// const templateTypeOptions = [
+//     { key: 'single', text: 'Single Image Ad', value: 'Single Image Ad' },
+//     { key: 'carousel', text: 'Carousel Ad', value: 'Carousel Ad' },
+// ]
 
-class AdForm extends Component {
-    state={
-        adName: '',
-        startDate: '',
-        template: '',
-        repeat: ''
+// const repeatOptions = [
+//     { key: 'daily', text: 'Daily', value: 'Daily' },
+//     { key: 'weekly', text: 'Weekly', value: 'Weekly' },
+//     { key: 'monthly', text: 'Monthly', value: 'Monthly' },
+// ]
+
+class AdForm extends Component{
+
+
+    renderAdNameInput = ({ input, meta, label }) => {
+        return (
+            <div className="field">
+                <label htmlFor={label}>{label}</label>
+                <input 
+                    {...input} 
+                    autoComplete="off" 
+                    placeholder="Enter Name" 
+                    id={label}
+                />
+                {this.renderError(meta)}
+            </div>
+        )
     }
 
-    onChange = (event) => {
-        this.setState({
-            [event.target.id]: event.target.value 
-        });
+    renderStartDateInput = ({ input, meta, label }) => {
+        return (
+            <div className="field">
+                <label htmlFor={label}>{label}</label>
+                <input                     
+                    id={label} 
+                    type="date"                     
+                    {...input}
+                />
+                {this.renderError(meta)}
+            </div>
+        );
     }
 
-    onChangeTemplate = (event) => {
-        this.setState({
-            template: event.target.textContent
-        });
+    renderTemplateInput = ({ input, meta, label }) => {
+        return (
+            <div className="eight wide field margin-bottom">
+                <label htmlFor={label}>{label}</label>
+                <select
+                    id={label}
+                    {...input}
+                >
+                    <option value="">Choose Template</option>
+                    <option value="Single Image Ad">Single Image Ad</option>
+                    <option value="Carousel Ad">Carousel Ad</option>
+                </select>
+                {this.renderError(meta)}
+            </div>
+        )
     }
 
-    onChangeRepeat = (event) => {
-        this.setState({
-            repeat: event.target.textContent
-        });
+    renderRepeatInput = ({ input, meta, label }) => {
+        return (
+            <div className="eight wide field margin-bottom">
+                <label htmlFor={label}>{label}</label>
+                <select 
+                    id={label}
+                    {...input}
+                    >
+                    <option value="">Choose Repeat Frequency</option>
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                </select>
+                {this.renderError(meta)}
+            </div>
+        )
     }
 
-    handleCreateDbEntry = () => {
-        createAd(this.state);
+    onSubmit = (formValues) => {
+        this.props.createAd(formValues);
+    }
+
+    handleCancel = () => {
+        history.push('/')
+    }
+
+    renderError = ({ touched, error }) => {
+        if (touched && error) {
+            return (
+                <div className="ui error message">
+                    <div>{error}</div>
+                </div>
+            )
+        }
     }
 
     render() {
         return (            
-            <Form>
-                <Form.Group widths={2}>
-                    <Form.Input label="Name" id="adName" type="text" placeholder="Name" onChange={this.onChange}/>
-                    <div className="field">                     
-                        <label htmlFor="">Start Date</label>
-                        <input label="Start Date" id="startDate" type="date" placeholder="Name" onChange={this.onChange} />  
-                    </div>
-                </Form.Group>
-                <Form.Group>                    
-                    <Form.Field 
-                        control={Select}
-                        options={templateTypeOptions}
-                        label={{ children: 'Template', htmlFor: 'template' }}
-                        placeholder={'Choose Template'}
-                        search
-                        searchInput={{ id: 'template' }}
-                        onChange={this.onChangeTemplate}
-                    />
-                    <Form.Field
-                        control={Select}
-                        options={templateTypeOptions}
-                        label={{ children: 'Template', htmlFor: 'template' }}
-                        placeholder={'Choose Template'}
-                        search
-                        searchInput={{ id: 'template' }}
-                        onChange={this.onChangeRepeat}
-                    />
-                </Form.Group>
+            <Form error>
+                <div className="two wide fields">                    
+                    <Field name="adName" label={'Ad Name'} component={this.renderAdNameInput} />                    
+                    <Field name="startDate" label={'Start Date'} component={this.renderStartDateInput} />
+                </div>
+                <div className="two wide fields">
+                    <Field name="template" label={'Template'} component={this.renderTemplateInput} />
+                    <Field name="repeat" label={'Repeat'} component={this.renderRepeatInput} />
+                </div>                 
                 <div>
-                    <Button negative floated="right">Cancel</Button>
+                    <Button negative floated="right"  onClick={this.handleCancel}>Cancel</Button>
                     <Button 
                         primary 
-                        floated="right" 
-                        onClick={this.handleCreateDbEntry} 
+                        floated="right"  
+                        onClick={this.props.handleSubmit(this.onSubmit)}
                     >Create</Button>
                 </div>
             </Form>
-
-
-
-            /* <div className="ui form">
-                <div className="two fields">
-                    <div className="field">
-                        <label htmlFor="">Name</label>
-                        <input type="text" placeholder="Name"/>
-                    </div>
-                    <div className="field">
-                        <label htmlFor="">Start Date</label>
-                        <input type="date" placeholder="Name" />
-                    </div>
-                </div>
-                <div className="two fields">
-                    <div className="field">
-                        <label>Template</label>
-                        <div className="ui selection dropdown" onClick={this.onToggleDropDown}>
-                            <input type="hidden" name="gender" />
-                            <i className="dropdown icon"></i>
-                            <div className="default text">Template</div>
-                            <div className="menu">
-                                <div className="item" data-value="1">Male</div>
-                                <div className="item" data-value="0">Female</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="field">
-                        <label>Repeat</label>
-                        <div className="ui selection dropdown" onClick={this.onToggleDropDown}>
-                            <input type="hidden" name="gender" />
-                            <i className="dropdown icon"></i>
-                            <div className="default text">Repeat</div>
-                            <div className="menu">
-                                <div className="item" data-value="1">Male</div>
-                                <div className="item" data-value="0">Female</div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-            </div> */
-
-            // <div></div>
         );
     }
 }
 
+const validate = (formValues) => {
+    const errors = {};
+    if(!formValues.adName) {
+        errors.adName = 'You must provide a name for your ad.'
+    }
+    if(!formValues.startDate) {
+        errors.startDate = 'You must provide a start date.'
+    }
+    if(!formValues.repeat) {
+        errors.repeat = 'You must set a repeat frequency.'
+    }
+    if(!formValues.template) {
+        errors.template = 'You must choose a template.'
+    }
+    return errors;
+}
 
-export default AdForm;
+
+export default connect(null, { createAd })(reduxForm({
+    form: 'createAd',
+    validate,
+    touchOnChange: false
+})(AdForm));
