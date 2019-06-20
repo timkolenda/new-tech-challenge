@@ -1,15 +1,28 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 import AdList from '../../AdList';
+import { fetchAds } from '../../../actions'; 
 
-const ListRoute = ({ setId }) => {
-    return(
-        <div className="ListRoute">
-            <AdList setId={setId}/>
-        </div>
-    );
+class ListRoute extends Component {
+    
+    componentDidMount() {
+        this.props.fetchAds();
+    }
+    
+    render() {
+        return(
+            <div className="ListRoute">
+                <AdList adList={this.props.adList}/>
+            </div>
+        );
+    }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        adList: Object.values(state.adList).reverse()
+    }
+}
 
-
-export default ListRoute;
+export default connect(mapStateToProps, { fetchAds })(ListRoute);

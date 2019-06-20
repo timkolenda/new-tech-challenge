@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button } from 'semantic-ui-react'
 import { parse } from 'datejs';
+import { connect } from 'react-redux';
+import { setEndDate } from '../../actions';
 
 import './style.scss';
 
-const SingleAd = ({ name, id, startDate, endDate, status }) => {
-    
+
+const SingleAd = ({ name, id, startDate, endDate, status, setEndDate }) => {
+
     const renderMessage = (status, startDate, endDate) => {
         switch (status) {
             case 'Scheduled':
@@ -15,8 +18,8 @@ const SingleAd = ({ name, id, startDate, endDate, status }) => {
                 return `This ad has been live since ${startDate}`;
             case 'Finished':
                 return `This ad ran from ${startDate} to ${endDate}`;
-            case 'Canceled':
-                return `This ad was cancelled before it started.`;
+            case 'Cancelled':
+                return `This ad was cancelled on ${endDate}, before it started.`;
             default: 
                 return `Error`;
         }   
@@ -30,11 +33,17 @@ const SingleAd = ({ name, id, startDate, endDate, status }) => {
             return 'success';
         case 'Finished':
             return 'violet';
-        case 'Canceled':
+        case 'Cancelled':
             return 'negative';
         default: 
             return `Error`;
         }
+    }
+
+    const updateEndDate = () => {
+        const currentDate = new Date().toString("yyyy/MM/dd");
+        // console.log(currentDate);
+        setEndDate(id, currentDate);
     }
 
     return (
@@ -53,8 +62,8 @@ const SingleAd = ({ name, id, startDate, endDate, status }) => {
                 </div>
                 <div>
                     {status === 'Scheduled' ? <Link to={`/edit/${id}`} className="ui button" >Edit</Link> : null}    
-                    {status === 'Scheduled' ? <Button content='Cancel' /> : null}
-                    {status === 'Live' ? <Button content='Finish' /> : null}
+                    {status === 'Scheduled' ? <Button content='Cancel' onClick={updateEndDate} /> : null}
+                    {status === 'Live' ? <Button content='Finish' onClick={updateEndDate} /> : null}
                 </div>
             </div>
         </div>
@@ -62,4 +71,4 @@ const SingleAd = ({ name, id, startDate, endDate, status }) => {
 }
 
 
-export default SingleAd;
+export default connect(null, { setEndDate })(SingleAd);

@@ -4,7 +4,7 @@ import {
     CREATE_AD,
     FETCH_ADS,
     FETCH_AD,
-    DELETE_AD,
+    SET_END_DATE,
     EDIT_AD
 } from './types';
 
@@ -33,11 +33,11 @@ export const fetchAd = (id) => async dispatch => {
     });
 }
 
-export const deleteAd = (id) => async dispatch => {
-    await database.delete(`/content/${id}`);
+export const setEndDate = (id, date) => async dispatch => {
+    const response = await database.patch(`/content/${id}`, {endDate: date} );
     dispatch({
-        type: DELETE_AD,
-        payload: id
+        type: SET_END_DATE,
+        payload: response.data
     });
 }
 
