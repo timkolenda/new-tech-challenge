@@ -24,7 +24,16 @@ const AdList = ({ adList }) => {
 
     const renderList = () => {
         if(!adList.length) {
-            return <div>Loading...</div>
+            return (
+                <div className="loader">
+                    <div class="ui segment">
+                        <div class="ui active inverted dimmer">
+                            <div class="ui text loader">Loading</div>
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            )
         }
         return adList.map((ad) => {
             return (

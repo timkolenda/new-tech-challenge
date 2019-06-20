@@ -104,25 +104,29 @@ class AdForm extends Component{
     }
 
     render() {
-        return (            
-            <Form error>
-                <div className="two wide fields">                    
-                    <Field name="adName" label={'Ad Name'} component={this.renderAdNameInput} />                    
-                    <Field name="startDate" label={'Start Date'} component={this.renderStartDateInput} />
-                </div>
-                <div className="two wide fields">
-                    <Field name="template" label={'Template'} component={this.renderTemplateInput} />
-                    <Field name="repeat" label={'Repeat'} component={this.renderRepeatInput} />
-                </div>                 
+        return (
+            <div className="ad-form ui container">
                 <div>
-                    <Button negative floated="right" onClick={() => history.push('/')}>Cancel</Button>
-                    <Button 
-                        primary 
-                        floated="right"  
-                        onClick={this.props.handleSubmit(this.onSubmit)}
-                    >Submit</Button>
+                    <h2 className="header">{this.props.heading}</h2>
                 </div>
-            </Form>
+                <Form error>
+                    <div className="two wide fields">                    
+                        <Field name="adName" label={'Ad Name'} component={this.renderAdNameInput} />                    
+                        <Field name="startDate" label={'Start Date'} component={this.renderStartDateInput} />
+                    </div>
+                    <div className="eight wide fields">
+                        <Field name="template" label={'Template'} component={this.renderTemplateInput} />
+                        <Field name="repeat" label={'Repeat'} component={this.renderRepeatInput} />
+                    </div>                 
+                    <div className="form-controls">
+                        <Button 
+                            primary 
+                            onClick={this.props.handleSubmit(this.onSubmit)}
+                        >Submit</Button>
+                        <Button negative onClick={() => history.push('/')}>Cancel</Button>
+                    </div>
+                </Form>
+            </div>            
         );
     }
 }

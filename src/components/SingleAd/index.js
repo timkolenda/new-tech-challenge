@@ -66,17 +66,17 @@ const SingleAd = ({ name, id, startDate, endDate, status, setEndDate, template, 
                 <div className="ad-controls">
                     {
                         status === 'Scheduled' 
-                        ? <Link to={`/edit/${id}`} className="ui button" >Edit</Link>
+                        ? <Link to={`/edit/${id}`} className="ui button primary" >Edit</Link>
                         : null
                     }    
                     {
                         status === 'Scheduled' 
-                        ? <Button Right Floated content='Cancel' onClick={updateEndDate} /> 
+                        ? <Button color="red" Right Floated content='Cancel' onClick={updateEndDate} /> 
                         : null
                     }
                     {
                         status === 'Live' 
-                        ? <Button Right Floated content='Finish' onClick={updateEndDate} /> 
+                        ? <Button color="red" Right Floated content='Finish' onClick={updateEndDate} /> 
                         : null
                         }
                 </div>

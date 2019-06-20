@@ -27,21 +27,23 @@ class ListRoute extends Component {
     render() {
         return(
             <div className="list-route">
-                <div className="ui container list-route__header">
-                    <div className="list-route__title">
-                        <h2 className="header">List Route</h2>
-                        <Button content="New Ad" onClick={() => history.push('/new')}/>
-                    </div>
-                    <div className="filterControls">
-                        <div className="ui input">
-                            <label className="visuallyhidden" htmlFor="searchTerm">Search</label>
-                            <input 
-                                type="text" 
-                                id="searchTerm" 
-                                onChange={this.handleChange} 
-                                value={this.state.serachTerm} 
-                                placeholder="Search..."
-                            />
+                <div className="list-route__header">
+                    <div className="ui container">
+                        <div className="list-route__title">
+                            <h2 className="header">List Route</h2>
+                            <Button color="blue" content="New Ad" onClick={() => history.push('/new')}/>
+                        </div>
+                        <div className="filterControls">
+                            <div className="ui input">
+                                <label className="visuallyhidden" htmlFor="searchTerm">Search</label>
+                                <input 
+                                    type="text" 
+                                    id="searchTerm" 
+                                    onChange={this.handleChange} 
+                                    value={this.state.serachTerm} 
+                                    placeholder="Search..."
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

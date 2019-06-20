@@ -1,15 +1,28 @@
 .app {
-    padding-top: 100px;
+    padding-top: 70px;
     background-color: #f5f5f5;
     min-height: calc(100vh);
+
     .ui-container {
         max-width: 70%;
-        height: calc(100vh - 100px);
+        // height: calc(100vh - 100px);
         margin: 0 auto;
         background-color: #fff;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        border-radius: 5px;
         box-shadow: 0 0 5px rgb(105, 105, 105);    
         overflow: scroll;
+    }
+}
+
+
+@media(max-width: 900px) {
+    .app .ui-container {
+        max-width: 90%;
+    }
+}
+
+@media(max-width: 500px) {
+    .app .ui-container {
+        max-width: 96%;
     }
 }

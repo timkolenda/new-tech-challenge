@@ -1,16 +1,23 @@
 
 
-.form {
-    padding: 20px;
-    margin: 20px;
-    .fields {
-        display: flex;
-        flex-wrap: wrap;
-        .field {
-            width: 50%;
+.ad-form {
+    padding: 10px;
+    .form {
+        margin-top: 10px;
+        .fields {
+            display: flex;
+            flex-wrap: wrap;
+            .field {
+                width: 50%;
+            }
+            .margin-bottom {
+                margin-bottom: 10px;
+            }
         }
-        .margin-bottom {
-            margin: 10px;
+        .form-controls {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
         }
     }
 }

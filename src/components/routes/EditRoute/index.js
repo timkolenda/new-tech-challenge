@@ -21,7 +21,9 @@ class EditRoute extends Component {
             <div>
                 <AdForm 
                     initialValues={this.props.ad}                    
-                    onSubmit={(formValues) => this.props.editAd(this.props.match.params.id, formValues)} />
+                    onSubmit={(formValues) => this.props.editAd(this.props.match.params.id, formValues)} 
+                    heading={'Edit Ad'}
+                />
             </div>
         );
     }
