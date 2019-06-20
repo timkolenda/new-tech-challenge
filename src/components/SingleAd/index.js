@@ -71,12 +71,12 @@ const SingleAd = ({ name, id, startDate, endDate, status, setEndDate, template, 
                     }    
                     {
                         status === 'Scheduled' 
-                        ? <Button color="red" Right Floated content='Cancel' onClick={updateEndDate} /> 
+                        ? <Button color="red" content='Cancel' onClick={updateEndDate} /> 
                         : null
                     }
                     {
                         status === 'Live' 
-                        ? <Button color="red" Right Floated content='Finish' onClick={updateEndDate} /> 
+                        ? <Button color="red" content='Finish' onClick={updateEndDate} /> 
                         : null
                         }
                 </div>
