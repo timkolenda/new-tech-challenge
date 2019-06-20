@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Button, Form, Select } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
+
 
 
 import './style.scss';
 import history from '../../utils/history';
-import { createAd } from '../../actions';
+
 
 
 
@@ -90,11 +90,7 @@ class AdForm extends Component{
     }
 
     onSubmit = (formValues) => {
-        this.props.createAd(formValues);
-    }
-
-    handleCancel = () => {
-        history.push('/')
+        this.props.onSubmit(formValues);
     }
 
     renderError = ({ touched, error }) => {
@@ -119,12 +115,12 @@ class AdForm extends Component{
                     <Field name="repeat" label={'Repeat'} component={this.renderRepeatInput} />
                 </div>                 
                 <div>
-                    <Button negative floated="right"  onClick={this.handleCancel}>Cancel</Button>
+                    <Button negative floated="right" onClick={() => history.push('/')}>Cancel</Button>
                     <Button 
                         primary 
                         floated="right"  
                         onClick={this.props.handleSubmit(this.onSubmit)}
-                    >Create</Button>
+                    >Submit</Button>
                 </div>
             </Form>
         );
@@ -149,8 +145,8 @@ const validate = (formValues) => {
 }
 
 
-export default connect(null, { createAd })(reduxForm({
+export default reduxForm({
     form: 'createAd',
     validate,
     touchOnChange: false
-})(AdForm));
+})(AdForm);

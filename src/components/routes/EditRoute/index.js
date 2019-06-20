@@ -1,32 +1,38 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 
 import AdForm from '../../AdForm';
 import database from "../../../apis/database";
+import { fetchAd, editAd } from '../../../actions';
+
 
 class EditRoute extends Component {
-    state = { selectedAd: {} }
     
-    // componentDidMount() {
-    //     this.fetchAd(this.props.id);
-    // }
 
-    // fetchAd = async (id) => {
-    //     const response = await database.get(`/content/${id}`)
-    //     console.log(response.data)
-    //     this.setState({ selectedAd: response.data });
-    // }
+    componentDidMount() {
+        this.props.fetchAd(this.props.match.params.id);
+        console.log(this.props)
+    }
 
     
     render() {
         return (
             <div>
-                <AdForm values={this.state.selectedAdData}/>
+                <AdForm 
+                    initialValues={this.props.ad}                    
+                    onSubmit={(formValues) => this.props.editAd(this.props.match.params.id, formValues)} />
             </div>
-
-        )
-    }   
+        );
+    }
 }
 
 
+const mapStateToProps = (state, ownProps) => {
+    return {
+        ad: state.adList[ownProps.match.params.id]
+    }
+}
 
-export default EditRoute;
+
+export default connect(mapStateToProps, { fetchAd, editAd })(EditRoute);

@@ -3,59 +3,64 @@ import { parse } from 'datejs';
 import { connect } from 'react-redux';
 
 import database from '../../apis/database';
-// import { fetchAds } from "../../utils/databaseCalls";
+import { fetchAds } from '../../actions';
 import SingleAd from '../SingleAd';
 
 class AdList extends Component {
-    state = { list: [] }
     
     componentDidMount() {
-        this.fetchAds();
+        this.props.fetchAds();
     }
 
-    checkIfAdIsLive = (date) => {
-        const adDate = Date.parse(date);
-        const currentDate = new Date();
-        if (currentDate >= adDate) {
-            return true;
+
+    determineAdStatus = (start, end) => {
+        const currentDate = new Date();        
+        const startDate = Date.parse(start);        
+        const endDate = Date.parse(end);        
+        if (!endDate && (currentDate >= startDate)) {
+            return 'Live';
+        } else if (!endDate && (currentDate < startDate)) {    
+            return 'Scheduled';
+        } else if (endDate >= startDate) {
+            return 'Finished';
         } else {
-            return false;
+            return 'Cancelled';
         }
     }
 
-    fetchAds = async () => {
-        const response = await database.get('/content');
-        const orderedResponse = response.data.reverse();
-        this.setState({ list: orderedResponse });
-    }
-
-    renderList = (list) => {
-        if(!this.state.list.length) {
+    renderList = (adList) => {
+        if(!this.props.adList.length) {
             return <div>Loading...</div>
         }
-        const renderedList = list.map((ad) => {
+        return this.props.adList.map((ad) => {
             return (
                 <SingleAd 
                     name={ad.adName}
                     id={ad.id}
                     key={ad.id}
-                    live={this.checkIfAdIsLive(ad.startDate)}
+                    status={this.determineAdStatus(ad.startDate, ad.endDate)}
                     startDate={ad.startDate}
+                    endDate={ad.endDate}
                 />
             );
         });
-        return renderedList;
     }
     
     render() {
         return (
             <div>
-                {this.renderList(this.state.list)}
+                {this.renderList()}
             </div>
         );
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        adList: Object.values(state.adList).reverse()
+    }
+}
 
 
-export default connect(null, {})(AdList);
+
+export default connect(mapStateToProps, { fetchAds })(AdList);

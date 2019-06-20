@@ -4,7 +4,7 @@ import './style.scss';
 
 const Header = () => {
     return (
-        <div className="header">
+        <div className="header-component">
             <h1>App Name</h1>
         </div>
     );

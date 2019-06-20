@@ -9,8 +9,7 @@ import {
 } from './types';
 
 export const createAd = formValues => async dispatch => {
-    // const { endDate } = ''
-    const response = await database.post('/content', { ...formValues })
+    const response = await database.post('/content', { ...formValues, endDate: null });
     dispatch({
         type: CREATE_AD,
         payload: response.data
@@ -48,6 +47,7 @@ export const editAd = (id, formValues) => async dispatch => {
         type: EDIT_AD,
         payload: response.data
     });
+    history.push('/');
 }
 
 
