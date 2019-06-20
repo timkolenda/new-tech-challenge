@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Button, Form, Select } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 
-
-
 import './style.scss';
 import history from '../../utils/history';
 

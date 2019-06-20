@@ -30,7 +30,7 @@ class ListRoute extends Component {
                 <div className="list-route__header">
                     <div className="ui container">
                         <div className="list-route__title">
-                            <h2 className="header">List Route</h2>
+                            <h2 className="header">Ad List</h2>
                             <Button color="blue" content="New Ad" onClick={() => history.push('/new')}/>
                         </div>
                         <div className="filterControls">
