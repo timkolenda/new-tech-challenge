@@ -12,7 +12,6 @@ class EditRoute extends Component {
 
     componentDidMount() {
         this.props.fetchAd(this.props.match.params.id);
-        console.log(this.props)
     }
 
     

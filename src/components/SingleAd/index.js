@@ -79,7 +79,6 @@ const SingleAd = ({ name, id, startDate, endDate, status, setEndDate, template, 
                         ? <Button color="red" content='Finish' onClick={updateEndDate} /> 
                         : null
                         }
-                        
                 </div>
             </div>
         </div>
