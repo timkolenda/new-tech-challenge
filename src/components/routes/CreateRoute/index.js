@@ -7,10 +7,10 @@ import AdForm from '../../AdForm';
 const CreateRoute = ({ createAd }) => {
     return (
         <div className="create-route">
-            <div className="route-heading">
-                <h2>Create New Ad</h2>
+            <div>
+                <h2 className='heading'>Create New Ad</h2>
             </div>
-            <AdForm onSubmit={createAd}/>
+            <AdForm onSubmit={createAd} />
         </div>
     );
 }

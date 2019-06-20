@@ -5,7 +5,8 @@ import {
     FETCH_ADS,
     FETCH_AD,
     SET_END_DATE,
-    EDIT_AD
+    EDIT_AD,
+    FILTER_BY_SEARCH_TERM
 } from './types';
 
 export const createAd = formValues => async dispatch => {
@@ -50,5 +51,15 @@ export const editAd = (id, formValues) => async dispatch => {
     history.push('/');
 }
 
-
+export const filterByName = (adList, searchTerm) => dispatch => {
+    const search = searchTerm.toUpperCase();
+    const filteredList = adList.filter((ad) => {
+        if (searchTerm === "") return true;
+        return ad.adName.toUpperCase().includes(search);
+    });
+    dispatch({
+        type: FILTER_BY_SEARCH_TERM,
+        payload: filteredList
+    });
+}
 

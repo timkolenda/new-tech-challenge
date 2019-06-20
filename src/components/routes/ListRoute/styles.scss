@@ -1,0 +1,18 @@
+.list-route {
+    &__title {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        h2 {
+            margin: 0;
+        }
+    }
+    &__header {
+        border-bottom: 1px solid grey;
+        padding-bottom: 20px;
+    }
+    .filterControls {
+        padding: 0 10px;
+    }
+}

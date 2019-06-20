@@ -22,7 +22,7 @@ const AdList = ({ adList }) => {
         }
     }
 
-    const renderList = (adList) => {
+    const renderList = () => {
         if(!adList.length) {
             return <div>Loading...</div>
         }
@@ -35,6 +35,8 @@ const AdList = ({ adList }) => {
                     status={determineAdStatus(ad.startDate, ad.endDate)}
                     startDate={ad.startDate}
                     endDate={ad.endDate}
+                    template={ad.template}
+                    repeat={ad.repeat}
                 />
             );
         });
@@ -43,7 +45,7 @@ const AdList = ({ adList }) => {
 
     return (
         <div>
-            {renderList(adList)}
+            {renderList()}
         </div>
     );
 }

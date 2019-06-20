@@ -8,7 +8,7 @@ import { setEndDate } from '../../actions';
 import './style.scss';
 
 
-const SingleAd = ({ name, id, startDate, endDate, status, setEndDate }) => {
+const SingleAd = ({ name, id, startDate, endDate, status, setEndDate, template, repeat }) => {
 
     const renderMessage = (status, startDate, endDate) => {
         switch (status) {
@@ -27,32 +27,35 @@ const SingleAd = ({ name, id, startDate, endDate, status, setEndDate }) => {
 
     const renderMessageType = (status) => {
         switch (status) {
-        case 'Scheduled':
-            return 'info';
-        case 'Live':
-            return 'success';
-        case 'Finished':
-            return 'violet';
-        case 'Cancelled':
-            return 'negative';
-        default: 
-            return `Error`;
+            case 'Scheduled':
+                return 'info';
+            case 'Live':
+                return 'success';
+            case 'Finished':
+                return 'violet';
+            case 'Cancelled':
+                return 'negative';
+            default: 
+                return `Error`;
         }
     }
 
     const updateEndDate = () => {
         const currentDate = new Date().toString("yyyy/MM/dd");
-        // console.log(currentDate);
         setEndDate(id, currentDate);
     }
-
+    
     return (
         <div className="single-ad">
             <div className="ui container">
                 <div>
                     <h3 className="header">{name}</h3>
+                    <div className="ad-details">
+                        <p>{template}</p>
+                        <p>Scheduled {repeat}</p>
+                    </div>
                 </div>
-                <div className="ad-details">
+                <div>
                     <div className={`ui visible message ${renderMessageType(status)}`}>
                         <div className="header">
                             Status: {status}
@@ -60,10 +63,22 @@ const SingleAd = ({ name, id, startDate, endDate, status, setEndDate }) => {
                         <p>{renderMessage(status, startDate, endDate)}</p>
                     </div>
                 </div>
-                <div>
-                    {status === 'Scheduled' ? <Link to={`/edit/${id}`} className="ui button" >Edit</Link> : null}    
-                    {status === 'Scheduled' ? <Button content='Cancel' onClick={updateEndDate} /> : null}
-                    {status === 'Live' ? <Button content='Finish' onClick={updateEndDate} /> : null}
+                <div className="ad-controls">
+                    {
+                        status === 'Scheduled' 
+                        ? <Link to={`/edit/${id}`} className="ui button" >Edit</Link>
+                        : null
+                    }    
+                    {
+                        status === 'Scheduled' 
+                        ? <Button Right Floated content='Cancel' onClick={updateEndDate} /> 
+                        : null
+                    }
+                    {
+                        status === 'Live' 
+                        ? <Button Right Floated content='Finish' onClick={updateEndDate} /> 
+                        : null
+                        }
                 </div>
             </div>
         </div>

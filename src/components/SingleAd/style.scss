@@ -1,7 +1,19 @@
 .single-ad {
     border-bottom: 1px solid grey;
     padding: 10px;
+    .ad-controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
     .ad-details {
-        // display: flex;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        p {
+            font-weight: bold;
+            line-height: 0;
+        }
     }
 }
