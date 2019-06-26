@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { Button } from 'semantic-ui-react'
+import { Button, Menu, Dropdown } from 'semantic-ui-react'
 
 import AdList from '../../AdList';
 import { fetchAds, filterByName } from '../../../actions'; 
@@ -33,7 +33,7 @@ class ListRoute extends Component {
                             <h2 className="header">Ad List</h2>
                             <Button color="blue" content="New Ad" onClick={() => history.push('/new')}/>
                         </div>
-                        <div className="filterControls">
+                        <div className="filter-controls">
                             <div className="ui input">
                                 <label className="visuallyhidden" htmlFor="searchTerm">Search</label>
                                 <input 
@@ -44,6 +44,20 @@ class ListRoute extends Component {
                                     placeholder="Search..."
                                 />
                             </div>
+                            <div className="right menu filter-controls__dropdown">
+                                <Button basic>
+                                    <i className="icon undo alternate"></i>
+                                </Button>
+                                <Dropdown item text='Filter By Status'>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item>Scheduled</Dropdown.Item>
+                                        <Dropdown.Item>Live</Dropdown.Item>
+                                        <Dropdown.Item>Finished</Dropdown.Item>
+                                        <Dropdown.Item>Cancelled</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

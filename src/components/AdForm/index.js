@@ -5,9 +5,6 @@ import { Field, reduxForm } from 'redux-form';
 import './style.scss';
 import history from '../../utils/history';
 
-
-
-
 //THESE WERE REMOVED BECAUSE SEMANTIC UI AND REDUX-FORM WEREN'T PLAYING NICE - ADJUSTED INPUT TO MORE BASIC VERSION FOR DROPDOWNS
 // const templateTypeOptions = [
 //     { key: 'single', text: 'Single Image Ad', value: 'Single Image Ad' },
@@ -24,6 +21,7 @@ class AdForm extends Component{
 
 
     renderAdNameInput = ({ input, meta, label }) => {
+        console.log(meta)
         return (
             <div className="field">
                 <label htmlFor={label}>{label}</label>
@@ -76,7 +74,7 @@ class AdForm extends Component{
                 <select 
                     id={label}
                     {...input}
-                    >
+                >
                     <option value="">Choose Repeat Frequency</option>
                     <option value="Daily">Daily</option>
                     <option value="Weekly">Weekly</option>
@@ -148,7 +146,6 @@ const validate = (formValues) => {
 
 
 export default reduxForm({
-    form: 'createAd',
-    validate,
-    touchOnChange: false
+    form: 'adForm',
+    validate
 })(AdForm);

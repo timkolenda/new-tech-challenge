@@ -1,8 +1,6 @@
 .list-route {
-    padding-top: 10px;
     &__title {
-        padding: 10px;
-        padding-top: 0;
+        padding-bottom: 20px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -12,9 +10,26 @@
     }
     &__header {
         border-bottom: 1px solid grey;
-        padding-bottom: 20px;
+        padding: 10px;
     }
-    .filterControls {
-        padding: 0 10px;
+    .filter-controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        &__dropdown {
+            align-self: center;
+            display: flex;
+            justify-content: center;
+            .ui.button {
+                margin-right: 10px !important;
+                i {
+                    margin: 0 !important;
+                }
+            }
+            & div {
+                display: flex;
+                align-items: center;
+            }
+        }
     }
 }

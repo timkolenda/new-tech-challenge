@@ -5,8 +5,6 @@ import SingleAd from '../SingleAd';
 
 const AdList = ({ adList }) => {
     
-
-
     const determineAdStatus = (start, end) => {
         const currentDate = new Date();        
         const startDate = Date.parse(start);        

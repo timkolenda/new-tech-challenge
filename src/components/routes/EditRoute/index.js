@@ -10,9 +10,11 @@ import { fetchAd, editAd } from '../../../actions';
 class EditRoute extends Component {
     
 
-    componentDidMount() {
-        this.props.fetchAd(this.props.match.params.id);
-    }
+    //This fetch ad function doesn't perform any function in this iteration of code
+    //I don't think the 'fetchAd' action is ever actually used - it could be removed
+    // componentDidMount() {
+    //     this.props.fetchAd(this.props.match.params.id);
+    // }
 
     
     render() {

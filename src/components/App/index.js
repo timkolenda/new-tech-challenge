@@ -10,14 +10,6 @@ import CreateRoute from '../routes/CreateRoute';
 
 
 const App = () => {
-
-    // state = {id: ''}
-
-    // setId = (id) => {
-    //     this.setState({ id }, () => {
-    //         history.push(`/edit/${this.state.id}`)
-    //     });
-    // }
     
     return (
         <div className="app">
