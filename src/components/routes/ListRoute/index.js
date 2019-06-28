@@ -44,7 +44,7 @@ class ListRoute extends Component {
                                     placeholder="Search..."
                                 />
                             </div>
-                            <div className="right menu filter-controls__dropdown">
+                            {/* <div className="right menu filter-controls__dropdown">
                                 <Button basic>
                                     <i className="icon undo alternate"></i>
                                 </Button>
@@ -56,7 +56,7 @@ class ListRoute extends Component {
                                         <Dropdown.Item>Cancelled</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
-                            </div>
+                            </div> */}
                             
                         </div>
                     </div>

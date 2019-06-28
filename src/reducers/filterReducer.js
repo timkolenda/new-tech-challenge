@@ -8,6 +8,6 @@ export default (state = {}, action) => {
             // return Object.assign({}, action.payload);
             return {...action.payload} //performs the same action as above but more readable 
         default: 
-            return state       
+            return state
     }
 }
