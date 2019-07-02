@@ -6,7 +6,7 @@ import Header from '../Header';
 import history from '../../utils/history';
 import ListRoute from '../routes/ListRoute';
 import EditRoute from '../routes/EditRoute';
-import CreateRoute from '../routes/CreateRoute';
+import NewRoute from '../routes/NewRoute';
 
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
                     <div className="ui-container">
                         <Switch>                        
                             <Route path="/" exact component={ListRoute} />
-                            <Route path="/new" exact component={CreateRoute} /> 
+                            <Route path="/new" exact component={NewRoute} /> 
                             <Route path="/edit/:id" exact component={EditRoute} />                        
                         </Switch>
                     </div>

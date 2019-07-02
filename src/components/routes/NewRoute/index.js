@@ -4,7 +4,7 @@ import { createAd } from '../../../actions';
 
 import AdForm from '../../AdForm';
 
-const CreateRoute = ({ createAd }) => {
+const NewRoute = ({ createAd }) => {
     return (
         <div className="create-route">
             <AdForm onSubmit={createAd} heading={'Create Ad'} />
@@ -14,4 +14,4 @@ const CreateRoute = ({ createAd }) => {
 
 
 
-export default connect(null, { createAd })(CreateRoute);
+export default connect(null, { createAd })(NewRoute);

@@ -26,6 +26,7 @@ export const fetchAds = () => async dispatch => {
     });
 }
 
+//Not used in current UI
 export const fetchAd = (id) => async dispatch => {
     const response = await database.get(`/content/${id}`);
     dispatch({
